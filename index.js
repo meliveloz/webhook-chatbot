@@ -39,7 +39,6 @@ app.post("/webhook", function (req, res) {
             // Iterara todos lo eventos capturados
             entry.messaging.forEach(function(event) {
                 if (event.message) {
-                    console.log(event.message);
                     process_event(event);
                 }
             });
@@ -50,7 +49,7 @@ app.post("/webhook", function (req, res) {
 // Funcion donde se procesara el evento
 function process_event(event){
   // Capturamos los datos del que genera el evento y el mensaje 
-  //console.log(event);
+  console.log(event);
   var senderID = event.sender.id;
   var message = event.message;
   
