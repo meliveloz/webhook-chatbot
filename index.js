@@ -69,7 +69,7 @@ function process_event(event){
             "elements": [{
               "title": "Te gusta mi foto??",
               "subtitle": "me considero bastante sexy",
-              "image_url": "https://img.buzzfeed.com/buzzfeed-static/static/2015-06/23/0/campaign_images/webdr08/17-times-salem-from-sabrina-summed-up-being-in-yo-2-5045-1435034889-16_dblbig.jpg",
+              "image_url": "https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
               "buttons": [
                 {
                   "type": "postback",
