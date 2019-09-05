@@ -41,11 +41,16 @@ app.post("/webhook", function (req, res) {
                 if (event.message) {
                     process_event(event);
                 }
+                else if (event.postback) {
+                    handlePostback(event);
+                  }
             });
         });
         res.sendStatus(200);
     }
 });
+
+
 // Funcion donde se procesara el evento
 function process_event(event){
   // Capturamos los datos del que genera el evento y el mensaje 
@@ -121,3 +126,21 @@ function enviar_texto(senderID, response){
       }
   }); 
 }
+
+function handlePostback(event) {
+    var senderID = event.sender.id;
+    var message = event.postback;
+    let response;
+    
+    // Get the payload for the postback
+    let payload = message.payload;
+  
+    // Set the response based on the postback payload
+    if (payload === 'yes') {
+      response = { "text": "Thanks!" }
+    } else if (payload === 'no') {
+      response = { "text": "Oops, try sending another image." }
+    }
+    // Send the message to acknowledge the postback
+    enviar_texto(senderID, response);
+  }
