@@ -46,3 +46,45 @@ app.post("/webhook", function (req, res) {
         res.sendStatus(200);
     }
 });
+// Funcion donde se procesara el evento
+function process_event(event){
+  // Capturamos los datos del que genera el evento y el mensaje 
+  var senderID = event.sender.id;
+  var message = event.message;
+  
+  // Si en el evento existe un mensaje de tipo texto
+  if(message.text){
+      // Crear un payload para un simple mensaje de texto
+      var response = {
+          "text": 'Enviaste este mensaje: ' + message.text
+      }
+  }
+  
+  // Enviamos el mensaje mediante SendAPI
+  enviar_texto(senderID, response);
+}
+
+// Funcion donde el chat respondera usando SendAPI
+function enviar_texto(senderID, response){
+  // Construcicon del cuerpo del mensaje
+  let request_body = {
+      "recipient": {
+        "id": senderID
+      },
+      "message": response
+  }
+  
+  // Enviar el requisito HTTP a la plataforma de messenger
+  request({
+      "uri": "https://graph.facebook.com/v2.6/me/messages",
+      "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
+      "method": "POST",
+      "json": request_body
+  }, (err, res, body) => {
+      if (!err) {
+        console.log('Mensaje enviado!')
+      } else {
+        console.error("No se puedo enviar el mensaje:" + err);
+      }
+  }); 
+}
