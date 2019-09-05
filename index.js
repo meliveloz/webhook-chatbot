@@ -67,8 +67,8 @@ function process_event(event){
           "payload": {
             "template_type": "generic",
             "elements": [{
-              "title": "Is this the right picture?",
-              "subtitle": "Tap a button to answer.",
+              "title": "Te gusta como me veo?",
+              "subtitle": "click en tu respuesta",
               "image_url": "https://pbs.twimg.com/media/DAMDnjHUMAUcOqN.jpg:large",
               "buttons": [
                 {
@@ -91,11 +91,11 @@ function process_event(event){
    else {
       console.log("creo que tenemos un error");
   }
-  }
+  
   
   // Enviamos el mensaje mediante SendAPI
   enviar_texto(senderID, response);
-
+}
 
 // Funcion donde el chat respondera usando SendAPI
 function enviar_texto(senderID, response){
