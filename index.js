@@ -35,6 +35,7 @@ app.post("/webhook", function (req, res) {
     // Verificar si el vento proviene del pagina asociada
     if (req.body.object == "page") {
         // Si existe multiples entradas entraas
+        console.log("este es el req_body->" req.body);
         req.body.entry.forEach(function(entry) {
             // Iterara todos lo eventos capturados
             entry.messaging.forEach(function(event) {
@@ -49,7 +50,7 @@ app.post("/webhook", function (req, res) {
 // Funcion donde se procesara el evento
 function process_event(event){
   // Capturamos los datos del que genera el evento y el mensaje 
-  console.log(event);
+  //console.log(event);
   var senderID = event.sender.id;
   var message = event.message;
   
@@ -83,7 +84,7 @@ function enviar_texto(senderID, response){
       "json": request_body
   }, (err, res, body) => {
       if (!err) {
-        console.log("holaaa")
+        console.log("enviando requisito HTTP")
       } else {
         console.error("No se puedo enviar el mensaje:" + err);
       }
