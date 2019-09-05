@@ -83,7 +83,7 @@ function enviar_texto(senderID, response){
       "json": request_body
   }, (err, res, body) => {
       if (!err) {
-        console.log(request_body)
+        console.log("holaaa")
       } else {
         console.error("No se puedo enviar el mensaje:" + err);
       }
