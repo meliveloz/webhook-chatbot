@@ -62,30 +62,7 @@ function process_event(event){
 }
   else if (message.text != "Hola") {
     response = {
-        "attachment": {
-          "type": "template",
-          "payload": {
-            "template_type": "generic",
-            "elements": [{
-              "title": "Te gusta mi foto??",
-              "subtitle": "me considero bastante sexy",
-              "image_url": "https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-              "buttons": [
-                {
-                  "type": "postback",
-                  "title": "Yes!",
-                  "payload": "yes",
-                },
-                {
-                  "type": "postback",
-                  "title": "No!",
-                  "payload": "no",
-                }
-              ],
-            }]
-          }
-        }
-      }
+        "text": 'no te entiendo, pero me caes muy bien'
     } 
       
    else {
