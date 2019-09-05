@@ -62,11 +62,35 @@ function process_event(event){
 }
   else if (message.text != "Hola") {
     response = {
-        "text": 'no te entiendo, pero me caes muy bien'
+        "attachment": {
+          "type": "template",
+          "payload": {
+            "template_type": "generic",
+            "elements": [{
+              "title": "Is this the right picture?",
+              "subtitle": "Tap a button to answer.",
+              "image_url": "https://pbs.twimg.com/media/DAMDnjHUMAUcOqN.jpg:large",
+              "buttons": [
+                {
+                  "type": "postback",
+                  "title": "Yes!",
+                  "payload": "yes",
+                },
+                {
+                  "type": "postback",
+                  "title": "No!",
+                  "payload": "no",
+                }
+              ],
+            }]
+          }
+        }
+      }
     } 
       
    else {
       console.log("creo que tenemos un error");
+  }
   }
   
   // Enviamos el mensaje mediante SendAPI
