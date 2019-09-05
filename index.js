@@ -59,7 +59,6 @@ function process_event(event){
       var response = {
           "text": 'hola para ti tambien'
       }
-  }
   else if (message.text != "Hola") {
     response = {
         "attachment": {
