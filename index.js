@@ -49,15 +49,15 @@ app.post("/webhook", function (req, res) {
 // Funcion donde se procesara el evento
 function process_event(event){
   // Capturamos los datos del que genera el evento y el mensaje 
-  console.log(event);
   var senderID = event.sender.id;
   var message = event.message;
+
   
   // Si en el evento existe un mensaje de tipo texto
-  if(message.text){
+  if(message.text == "Hola"){
       // Crear un payload para un simple mensaje de texto
       var response = {
-          "text": 'Enviaste este mensaje: ' + message.text
+          "text": 'hola para ti tambien'
       }
   }
   
