@@ -61,9 +61,32 @@ function process_event(event){
       }
   }
   else if (message.text != "Hola") {
-      var response = {
-          "text": 'No logro entender, pero me caes bien'
+    response = {
+        "attachment": {
+          "type": "template",
+          "payload": {
+            "template_type": "generic",
+            "elements": [{
+              "title": "Te gusta mi foto??",
+              "subtitle": "me considero bastante sexy",
+              "image_url": "https://img.buzzfeed.com/buzzfeed-static/static/2015-06/23/0/campaign_images/webdr08/17-times-salem-from-sabrina-summed-up-being-in-yo-2-5045-1435034889-16_dblbig.jpg",
+              "buttons": [
+                {
+                  "type": "postback",
+                  "title": "Yes!",
+                  "payload": "yes",
+                },
+                {
+                  "type": "postback",
+                  "title": "No!",
+                  "payload": "no",
+                }
+              ],
+            }]
+          }
+        }
       }
+    } 
       
   } else {
       console.log("creo que tenemos un error");
