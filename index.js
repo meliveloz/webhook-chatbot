@@ -60,6 +60,14 @@ function process_event(event){
           "text": 'hola para ti tambien'
       }
   }
+  else if (message.text != "Hola") {
+      var response = {
+          "text": 'No logro entender, pero me caes bien'
+      }
+      
+  } else {
+      console.log("creo que tenemos un error");
+  }
   
   // Enviamos el mensaje mediante SendAPI
   enviar_texto(senderID, response);
