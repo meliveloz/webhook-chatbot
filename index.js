@@ -59,6 +59,7 @@ function process_event(event){
       var response = {
           "text": 'hola para ti tambien'
       }
+}
   else if (message.text != "Hola") {
     response = {
         "attachment": {
@@ -87,13 +88,13 @@ function process_event(event){
       }
     } 
       
-  } else {
+   else {
       console.log("creo que tenemos un error");
   }
   
   // Enviamos el mensaje mediante SendAPI
   enviar_texto(senderID, response);
-}
+
 
 // Funcion donde el chat respondera usando SendAPI
 function enviar_texto(senderID, response){
