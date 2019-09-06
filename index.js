@@ -47,7 +47,7 @@ app.get("/webhook", function (req, res) {
     }
 });
 
-// Todos eventos de mesenger sera capturados por esta ruta
+// Todos eventos de mesenger sera capturados por esta rutaa
 app.post("/webhook", function (req, res) {
     // Verificar si el vento proviene del pagina asociada
     if (req.body.object == "page") {
