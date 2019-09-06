@@ -1,22 +1,7 @@
 // Importar las dependencias para configurar el servidor
-/*El código se encuentra en Harukoapp donde se encuentra levantado
- el servidor (hay que sincronizarlo con la rama master en 
-github para que se actualize solo por cada cambio)
-*/
 var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
-const Watson = require("watson-developer-cloud");
-const path = require('path');
-
-const assistant = new Watson.ConversationV1({
-    username: process.env.ASSISTANT_USERNAME,
-    password: process.env.ASSISTANT_PASSWORD,
-    url: process.env.ASSISTANT_URL,
-    version: 'v1',
-    version_date: '2017-05-26'
-})
-
 
 var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
@@ -26,14 +11,12 @@ app.listen((process.env.PORT || 5000), () => console.log('El servidor webhook es
 
 // Ruta de la pagina index
 app.get("/", function (req, res) {
-    res.send("Se ha desplegado de manera exitosa !!");
+    res.send("Se ha desplegado de manera exitosa el CMaquera ChatBot :D!!!");
 });
 
 // Facebook Webhook
 
 // Usados para la verificacion
-/*VERIFICATION_TOKEN y  PAGE_ACCESS_TOKEN  se encuentran settiados en las variables de entorno
-en harukoapp*/
 app.get("/webhook", function (req, res) {
     // Verificar la coincidendia del token
     if (req.query["hub.verify_token"] === process.env.VERIFICATION_TOKEN) {
@@ -47,7 +30,7 @@ app.get("/webhook", function (req, res) {
     }
 });
 
-// Todos eventos de mesenger sera capturados por esta rutaa
+// Todos eventos de mesenger sera apturados por esta ruta
 app.post("/webhook", function (req, res) {
     // Verificar si el vento proviene del pagina asociada
     if (req.body.object == "page") {
@@ -56,21 +39,7 @@ app.post("/webhook", function (req, res) {
             // Iterara todos lo eventos capturados
             entry.messaging.forEach(function(event) {
                 if (event.message) {
-                    console.log("Received message");
-          const workspaceID = process.env.ASSISTANT_WORKSPACEID;
-          var payload = {
-            workspace_id: workspaceID,
-            input: event.message
-          };
-          assistant.message(payload, function (err, data) {
-            if (err) {
-              console.log("error");
-              console.log(err);
-              return res.status(err.code || 500).json(err);
-            }
-            process_event(event, data);    
-          });
-    
+                    process_event(event);
                 }
                 else if (event.postback) {
                     handlePostback(event);
@@ -83,19 +52,54 @@ app.post("/webhook", function (req, res) {
 
 
 // Funcion donde se procesara el evento
-function process_event(event, watsonResponse){
+function process_event(event){
   // Capturamos los datos del que genera el evento y el mensaje 
   var senderID = event.sender.id;
   var message = event.message;
 
   
   // Si en el evento existe un mensaje de tipo texto
-  if(message.text){
+  if(message.text == "Hola"){
       // Crear un payload para un simple mensaje de texto
-
-
+      var response = {
+          "text": 'hola para ti tambien'
+      }
+}
+  else if (message.text != "Hola") {
+    response = {
+        "attachment": {
+          "type": "template",
+          "payload": {
+            "template_type": "generic",
+            "elements": [{
+              "title": "Te gusta como me veo?",
+              "subtitle": "click en tu respuesta",
+              "image_url": "https://pbs.twimg.com/media/DAMDnjHUMAUcOqN.jpg:large",
+              "buttons": [
+                {
+                  "type": "postback",
+                  "title": "Yes!",
+                  "payload": "yes",
+                },
+                {
+                  "type": "postback",
+                  "title": "No!",
+                  "payload": "no",
+                }
+              ],
+            }]
+          }
+        }
+      }
+    } 
+      
+   else {
+      console.log("creo que tenemos un error");
+  }
+  
+  
   // Enviamos el mensaje mediante SendAPI
-  enviar_texto(senderID, watsonResponse.output.text[0]);
+  enviar_texto(senderID, response);
 }
 
 // Funcion donde el chat respondera usando SendAPI
@@ -128,15 +132,15 @@ function handlePostback(event) {
     var message = event.postback;
     let response;
     
-    // Obteniendo el payload devuelto
+    // Get the payload for the postback
     let payload = message.payload;
   
-    // Settiar la respuesta de acuerdo a la respuesta obtenida
+    // Set the response based on the postback payload
     if (payload === 'yes') {
       response = { "text": "Gracias, me caes bien" }
     } else if (payload === 'no') {
       response = { "text": "mmm no me caes bien" }
     }
-    // Enviar de vuelta el mensaje segun corresponda la respuesta.
+    // Send the message to acknowledge the postback
     enviar_texto(senderID, response);
   }
