@@ -2,7 +2,7 @@
 var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
-var facebook = require("../messenger-webhook/Facebook/index")
+var facebook = require("./Facebook/index"
 var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
