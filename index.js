@@ -3,7 +3,7 @@ var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
 var app = express();
-const AssistantV1 = require("ibm-watson/assistant/v1");
+var AssistantV1 = require('ibm-watson/assistant/v1');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 // configurar el puerto y el mensaje en caso de exito
@@ -14,13 +14,17 @@ app.get("/", function (req, res) {
     res.send("Se ha desplegado de manera exitosa el CMaquera ChatBot :D!!!");
 });
 
-const assistant = new AssistantV1({
-  version: '2019-02-28',
-  username: process.env.SERVICE_NAME_USERNAME,
-  password: process.env.SERVICE_NAME_PASSWORD,
-  url: process.env.ASSISTANT_URL
-});
-
+function watsonAssistant() {
+  return new AssistantV1({
+      url: "https://gateway.watsonplatform.net/assistant/api",
+      username: process.env.SERVICE_NAME_USERNAME,
+      password: process.env.SERVICE_NAME_PASSWORD,
+      version: '2018-04-26',
+      headers: {
+          'X-Watson-Learning-Opt-Out': 'true'
+      }
+  });
+}
 // Facebook Webhook
 
 // Usados para la verificacion
