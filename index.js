@@ -57,7 +57,7 @@ function process_event(event){
   var senderID = event.sender.id;
   var message = event.message;
 
-  sendAction(senderID, action);
+  //sendAction(senderID, action);
   // Si en el evento existe un mensaje de tipo texto
   if(message.text == "Hola"){
       // Crear un payload para un simple mensaje de texto
@@ -147,24 +147,3 @@ function handlePostback(event) {
     enviar_texto(senderID, response);
   }
 
-  function sendAction(data,action) {
-    return new Promise((resolve, reject) => {
-      request({
-        url: 'https://graph.facebook.com/v3.1/me/messages',
-        qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
-        method: 'POST',
-        json: {
-          recipient: {id: data.sender},
-          sender_action: action
-        }
-      }, (error, response) => {
-        if (error) {
-          reject('ERROR_FACEBOOK_SENDING_ACTION=' + error);
-        } else if (response.body.error) {
-          reject('ERROR_FACEBOOK_SENDING_ACTION=' + response.body.error);
-        }
-  
-        resolve(data);
-      });
-    });
-  }
