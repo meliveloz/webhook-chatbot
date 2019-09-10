@@ -18,7 +18,7 @@ const assistant = new AssistantV1({
   version: '2019-02-28',
   username: process.env.SERVICE_NAME_USERNAME,
   password: process.env.SERVICE_NAME_PASSWORD,
-  url: ASSISTANT_URL
+  url: process.env.ASSISTANT_URL
 });
 
 // Facebook Webhook
