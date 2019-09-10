@@ -107,8 +107,8 @@ function process_event(event){
 // Funcion donde el chat respondera usando SendAPI
 function enviar_texto(senderID, response){
   // Construcicon del cuerpo del mensaje
-  facebook.sendAction(senderID, 'typing_on');
-
+    facebook.sendAction(senderID, 'typing_on');
+    
   let request_body = {
       "recipient": {
         "id": senderID
