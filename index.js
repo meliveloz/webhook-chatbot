@@ -151,7 +151,7 @@ function handlePostback(event) {
     return new Promise((resolve, reject) => {
       request({
         url: 'https://graph.facebook.com/v3.1/me/messages',
-        qs: {access_token: process.env.process.env.PAGE_ACCESS_TOKEN},
+        qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
         method: 'POST',
         json: {
           recipient: {id: data},
