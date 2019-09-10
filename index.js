@@ -56,7 +56,7 @@ function process_event(event){
   // Capturamos los datos del que genera el evento y el mensaje 
   var senderID = event.sender.id;
   var message = event.message;
-    sendAction(senderID, 'typing_on');
+    
   //sendAction(senderID, action);
   // Si en el evento existe un mensaje de tipo texto
   if(message.text == "Hola"){
@@ -107,6 +107,8 @@ function process_event(event){
 // Funcion donde el chat respondera usando SendAPI
 function enviar_texto(senderID, response){
   // Construcicon del cuerpo del mensaje
+  sendAction(senderID, 'typing_on');
+
   let request_body = {
       "recipient": {
         "id": senderID
@@ -133,7 +135,7 @@ function handlePostback(event) {
     var senderID = event.sender.id;
     var message = event.postback;
     let response;
-    sendAction(senderID, 'typing_on');
+
     // Get the payload for the postback
     let payload = message.payload;
   
