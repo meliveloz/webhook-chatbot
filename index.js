@@ -2,7 +2,6 @@
 var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
-var facebook = require("./Facebook/index");
 var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -107,8 +106,8 @@ function process_event(event){
 // Funcion donde el chat respondera usando SendAPI
 function enviar_texto(senderID, response){
   // Construcicon del cuerpo del mensaje
-    facebook.sendAction(senderID, 'typing_on');
-    
+    sendAction(senderID, 'typing_on');
+
   let request_body = {
       "recipient": {
         "id": senderID
@@ -149,5 +148,26 @@ function handlePostback(event) {
     enviar_texto(senderID, response);
   }
 
+  function sendAction(data,action) {
+    return new Promise((resolve, reject) => {
+      request({
+        url: 'https://graph.facebook.com/v3.1/me/messages',
+        qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+        method: 'POST',
+        json: {
+          recipient: {id: data},
+          sender_action: action
+        }
+      }, (error, response) => {
+        if (error) {
+          reject('ERROR_FACEBOOK_SENDING_ACTION=');
+        } else if (response.body.error) {
+          reject('ERROR_FACEBOOK_SENDING_ACTION=');
+        }
+  
+        resolve(data);
+      });
+    });
+  }
 
 
