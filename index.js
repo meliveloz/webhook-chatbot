@@ -56,7 +56,7 @@ function process_event(event){
   // Capturamos los datos del que genera el evento y el mensaje 
   var senderID = event.sender.id;
   var message = event.message;
-    sendAction(senderID, action);
+    sendAction(senderID, 'typing_on');
   //sendAction(senderID, action);
   // Si en el evento existe un mensaje de tipo texto
   if(message.text == "Hola"){
@@ -154,7 +154,7 @@ function handlePostback(event) {
         qs: {access_token: process.env.FB_ACCESS_TOKEN},
         method: 'POST',
         json: {
-          recipient: {id: data.sender},
+          recipient: {id: data},
           sender_action: action
         }
       }, (error, response) => {
