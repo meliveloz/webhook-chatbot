@@ -2,7 +2,7 @@
 var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
-
+var facebook = require("../messenger-webhook/Facebook/index")
 var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -30,7 +30,7 @@ app.get("/webhook", function (req, res) {
     }
 });
 
-// Todos eventos de mesenger sera apturados por esta ruta
+// Todos eventos de mesenger seran capturados por esta ruta
 app.post("/webhook", function (req, res) {
     // Verificar si el vento proviene del pagina asociada
     if (req.body.object == "page") {
@@ -107,7 +107,7 @@ function process_event(event){
 // Funcion donde el chat respondera usando SendAPI
 function enviar_texto(senderID, response){
   // Construcicon del cuerpo del mensaje
-  sendAction(senderID, 'typing_on');
+  facebook.sendAction(senderID, 'typing_on');
 
   let request_body = {
       "recipient": {
@@ -149,24 +149,5 @@ function handlePostback(event) {
     enviar_texto(senderID, response);
   }
 
-  function sendAction(data,action) {
-    return new Promise((resolve, reject) => {
-      request({
-        url: 'https://graph.facebook.com/v3.1/me/messages',
-        qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
-        method: 'POST',
-        json: {
-          recipient: {id: data},
-          sender_action: action
-        }
-      }, (error, response) => {
-        if (error) {
-          reject('ERROR_FACEBOOK_SENDING_ACTION=');
-        } else if (response.body.error) {
-          reject('ERROR_FACEBOOK_SENDING_ACTION=');
-        }
-  
-        resolve(data);
-      });
-    });
-  }
+
+
