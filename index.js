@@ -3,7 +3,7 @@ var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
 var app = express();
-const  = require('ibm-watson/assistant/v1');
+const AssistantV1 = require("ibm-watson/assistant/v1");
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 // configurar el puerto y el mensaje en caso de exito
