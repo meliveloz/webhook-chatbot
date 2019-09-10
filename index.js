@@ -133,7 +133,7 @@ function handlePostback(event) {
     var senderID = event.sender.id;
     var message = event.postback;
     let response;
-    
+    sendAction(senderID, 'typing_on');
     // Get the payload for the postback
     let payload = message.payload;
   
