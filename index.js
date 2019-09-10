@@ -3,6 +3,7 @@ var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
 var app = express();
+const  = require('ibm-watson/assistant/v1');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 // configurar el puerto y el mensaje en caso de exito
@@ -11,6 +12,13 @@ app.listen((process.env.PORT || 5000), () => console.log('El servidor webhook es
 // Ruta de la pagina index
 app.get("/", function (req, res) {
     res.send("Se ha desplegado de manera exitosa el CMaquera ChatBot :D!!!");
+});
+
+const assistant = new AssistantV1({
+  version: '2019-02-28',
+  username: process.env.SERVICE_NAME_USERNAME,
+  password: process.env.SERVICE_NAME_PASSWORD,
+  url: ASSISTANT_URL
 });
 
 // Facebook Webhook
