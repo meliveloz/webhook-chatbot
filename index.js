@@ -44,17 +44,19 @@ app.get("/webhook", function (req, res) {
 // Todos eventos de mesenger seran capturados por esta ruta
 app.post("/webhook", function (req, res) {
     // Verificar si el evento proviene del pagina asociada
-    console.log(req.body.entry.messaging);
+    
     if (req.body.object == "page") {
         // Si existe multiples entradas entraas
         req.body.entry.forEach(function(entry) {
             // Iterara todos lo eventos capturados
             entry.messaging.forEach(function(event) {
                 if (event.message) {
+                    console.log(event.message);
                     process_event(event);
                 }
                 else if (event.postback) {
                     handlePostback(event);
+                    console.log(event.postback);
                   }
             });
         });
