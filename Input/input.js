@@ -1,4 +1,5 @@
 const facebook = require('../Facebook/index');
+module.exports.enviar_texto = enviar_texto;
 
 function enviar_texto(senderID, response){
     // Construcicon del cuerpo del mensaje
@@ -24,5 +25,3 @@ function enviar_texto(senderID, response){
         }
     }); 
   };
-
-  module.exports = {enviar_texto};

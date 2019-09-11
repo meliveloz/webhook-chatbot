@@ -1,4 +1,5 @@
  //Función que genera los puntitos cada vez que el usuario espera una respuesta.
+module.exports.sendAction = sendAction;
 function sendAction(data,action) {
     return new Promise((resolve, reject) => {
       request({
@@ -20,5 +21,3 @@ function sendAction(data,action) {
       });
     });
   }
-
-  module.exports = {sendAction};
