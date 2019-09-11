@@ -4,6 +4,7 @@ var request = require("request");
 var bodyParser = require("body-parser");
 var app = express();
 var AssistantV1 = require('ibm-watson/assistant/v1');
+var SendText = require('./Input/input');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 // configurar el puerto y el mensaje en caso de exito
@@ -132,11 +133,11 @@ else if (message.text == "Chao"){
   // Enviamos el mensaje mediante SendAPI
 
   
-  enviar_texto(senderID, response);
+  SendText.enviar_texto(senderID, response);
 }
 
 // Funcion donde el chat respondera usando SendAPI
-function enviar_texto(senderID, response){
+/*function enviar_texto(senderID, response){
   // Construcicon del cuerpo del mensaje
     sendAction(senderID, 'typing_on');
   let request_body = {
@@ -159,7 +160,7 @@ function enviar_texto(senderID, response){
         console.error("No se puedo enviar el mensaje:" + err);
       }
   }); 
-}
+}*/
 
 function handlePostback(event) {
     var senderID = event.sender.id;
