@@ -79,6 +79,30 @@ function process_event(event){
           "text": 'hola para ti tambien'
       }
 }
+else if (message.text == "Chao"){
+    response ={ 
+        "recipient":{
+          "id": senderID
+        },
+        "messaging_type": "RESPONSE",
+        "message":{
+          "text": "Pick a color:",
+          "quick_replies":[
+            {
+              "content_type":"text",
+              "title":"Red",
+              "payload":"SI",
+              "image_url":"http://example.com/img/red.png"
+            },{
+              "content_type":"text",
+              "title":"Green",
+              "payload":"NO",
+              "image_url":"http://example.com/img/green.png"
+            }
+          ]
+        }
+      }  
+    }
   else if (message.text != "Hola") {
     response = {
         "attachment": {
