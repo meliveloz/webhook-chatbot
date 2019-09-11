@@ -14,17 +14,15 @@ app.get("/", function (req, res) {
     res.send("Se ha desplegado de manera exitosa el CMaquera ChatBot :D!!!");
 });
 
- function watsonAssistant() {
-  return new AssistantV1({
-      url: "https://gateway.watsonplatform.net/assistant/api",
-      username: process.env.SERVICE_NAME_USERNAME,
-      password: process.env.SERVICE_NAME_PASSWORD,
-      version: '2018-04-26',
-      headers: {
-          'X-Watson-Learning-Opt-Out': 'true'
-      }
+const assistant = new AssistantV1({
+    url: "https://gateway.watsonplatform.net/assistant/api",
+    username: process.env.SERVICE_NAME_USERNAME,
+    password: process.env.SERVICE_NAME_PASSWORD,
+    version: '2018-04-26',
+    headers: {
+      'X-Watson-Learning-Opt-Out': 'true'
+    }
   });
-}
 // Facebook Webhook
 
 // Usados para la verificacion
@@ -186,7 +184,7 @@ function handlePostback(event) {
     intent: 'Hola'
   };
   
-  watsonAssistant.getIntent(params, function(err, response) {
+  assistant.getIntent(params, function(err, response) {
     if (err) {
       console.error(err);
     } else {
