@@ -51,12 +51,12 @@ app.post("/webhook", function (req, res) {
             // Iterara todos lo eventos capturados
             entry.messaging.forEach(function(event) {
                 if (event.message) {
-                    console.log(event.message);
+                    console.log(event);
                     process_event(event);
                 }
                 else if (event.postback) {
                     handlePostback(event);
-                    console.log(event.postback);
+                    console.log(event);
                   }
             });
         });
