@@ -14,7 +14,7 @@ app.get("/", function (req, res) {
     res.send("Se ha desplegado de manera exitosa el CMaquera ChatBot :D!!!");
 });
 
-function watsonAssistant() {
+const service = function watsonAssistant() {
   return new AssistantV1({
       url: "https://gateway.watsonplatform.net/assistant/api",
       username: process.env.SERVICE_NAME_USERNAME,
