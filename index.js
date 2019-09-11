@@ -81,15 +81,15 @@ function process_event(event){
 }
 else if (message.text == "Chao"){
     response ={ 
-          "text": "Pick a color:",
+          "text": "Me vas a abandonar?:",
           "quick_replies":[
             {
               "content_type":"text",
-              "title":"Red",
+              "title":"SI",
               "payload":"SI" 
             },{
               "content_type":"text",
-              "title":"Green",
+              "title":"NO",
               "payload":"NO"
             }
           ]
