@@ -91,13 +91,11 @@ else if (message.text == "Chao"){
             {
               "content_type":"text",
               "title":"Red",
-              "payload":"SI",
-              "image_url":"http://example.com/img/red.png"
+              "payload":"SI" 
             },{
               "content_type":"text",
               "title":"Green",
-              "payload":"NO",
-              "image_url":"http://example.com/img/green.png"
+              "payload":"NO"
             }
           ]
         }
