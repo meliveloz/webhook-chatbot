@@ -4,6 +4,7 @@ var request = require("request");
 var bodyParser = require("body-parser");
 var app = express();
 var AssistantV1 = require('ibm-watson/assistant/v1');
+var face = require('./Facebook/index');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 // configurar el puerto y el mensaje en caso de exito
@@ -138,7 +139,7 @@ else if (message.text == "Chao"){
 // Funcion donde el chat respondera usando SendAPI
 function enviar_texto(senderID, response){
   // Construcicon del cuerpo del mensaje
-    sendAction(senderID, 'typing_on');
+    face.sendAction(senderID, 'typing_on');
 
   let request_body = {
       "recipient": {
@@ -184,7 +185,7 @@ function handlePostback(event) {
     enviar_texto(senderID, response);
   }
 
-  function sendAction(data,action) {
+  /*function sendAction(data,action) {
     return new Promise((resolve, reject) => {
       request({
         url: 'https://graph.facebook.com/v3.1/me/messages',
@@ -204,5 +205,5 @@ function handlePostback(event) {
         resolve(data);
       });
     });
-  }
+  }*/
 

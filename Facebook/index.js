@@ -1,6 +1,5 @@
  //Función que genera los puntitos cada vez que el usuario espera una respuesta.
-
- function sendAction(data,action) {
+function sendAction(data,action) {
     return new Promise((resolve, reject) => {
       request({
         url: 'https://graph.facebook.com/v3.1/me/messages',
