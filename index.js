@@ -43,7 +43,7 @@ app.get("/webhook", function (req, res) {
 
 // Todos eventos de mesenger seran capturados por esta ruta
 app.post("/webhook", function (req, res) {
-    // Verificar si el vento proviene del pagina asociada
+    // Verificar si el evento proviene del pagina asociada
     if (req.body.object == "page") {
         // Si existe multiples entradas entraas
         req.body.entry.forEach(function(entry) {
@@ -181,5 +181,16 @@ function handlePostback(event) {
       });
     });
   }
-
+  const params = {
+    workspace_id: process.env.ASSISTANT_WORKSPACEID,
+    intent: 'Hola'
+  };
+  
+  service.getIntent(params, function(err, response) {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log(JSON.stringify(response, null, 2));
+    } 
+  });
 
