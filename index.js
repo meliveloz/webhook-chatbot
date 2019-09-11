@@ -181,7 +181,7 @@ function handlePostback(event) {
         response = {"text": "entonces no me amenaces!!"}
     }
     // Send the message to acknowledge the postback
-    enviar_texto(senderID, response);
+    SendText.enviar_texto(senderID, response);
   }
 
   /*function sendAction(data,action) {
