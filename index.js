@@ -81,9 +81,6 @@ function process_event(event){
 }
 else if (message.text == "Chao"){
     response ={ 
-        "recipient":{
-          "id": senderID
-        },
         "messaging_type": "RESPONSE",
         "message":{
           "text": "Pick a color:",
