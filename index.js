@@ -80,7 +80,7 @@ function process_event(event){
       }
 }
 else if (message.text == "Chao"){
-    response ={ 
+    response = { 
           "text": "Me vas a abandonar?:",
           "quick_replies":[
             {
@@ -175,6 +175,10 @@ function handlePostback(event) {
       response = { "text": "Gracias, me caes bien" }
     } else if (payload === 'no') {
       response = { "text": "mmm no me caes bien" }
+    } else if (payload === 'SI'){
+        response = {"text": "OK, te veo despues"}
+    } else if (payload === "NO") {
+        response = {"text": "entonces no me amenaces!!"}
     }
     // Send the message to acknowledge the postback
     enviar_texto(senderID, response);
