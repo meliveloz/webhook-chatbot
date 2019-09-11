@@ -81,7 +81,6 @@ function process_event(event){
 }
 else if (message.text == "Chao"){
     response ={ 
-        "message":{
           "text": "Pick a color:",
           "quick_replies":[
             {
@@ -94,7 +93,7 @@ else if (message.text == "Chao"){
               "payload":"NO"
             }
           ]
-        }
+        
       }  
     }
   else if (message.text != "Hola") {
