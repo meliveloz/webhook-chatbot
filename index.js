@@ -4,7 +4,6 @@ var request = require("request");
 var bodyParser = require("body-parser");
 var app = express();
 var AssistantV1 = require('ibm-watson/assistant/v1');
-var Face = require('./Input/input');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 // configurar el puerto y el mensaje en caso de exito
@@ -133,11 +132,11 @@ else if (message.text == "Chao"){
   // Enviamos el mensaje mediante SendAPI
 
   
-  Face.enviar_texto(senderID, response);
+  enviar_texto(senderID, response);
 }
 
 // Funcion donde el chat respondera usando SendAPI
-/*function enviar_texto(senderID, response){
+function enviar_texto(senderID, response){
   // Construcicon del cuerpo del mensaje
     sendAction(senderID, 'typing_on');
   let request_body = {
@@ -160,7 +159,7 @@ else if (message.text == "Chao"){
         console.error("No se puedo enviar el mensaje:" + err);
       }
   }); 
-}*/
+}
 
 function handlePostback(event) {
     var senderID = event.sender.id;
@@ -181,10 +180,10 @@ function handlePostback(event) {
         response = {"text": "entonces no me amenaces!!"}
     }
     // Send the message to acknowledge the postback
-    Face.enviar_texto(senderID, response);
+    enviar_texto(senderID, response);
   }
 
-  /*function sendAction(data,action) {
+  function sendAction(data,action) {
     return new Promise((resolve, reject) => {
       request({
         url: 'https://graph.facebook.com/v3.1/me/messages',
@@ -204,5 +203,5 @@ function handlePostback(event) {
         resolve(data);
       });
     });
-  }*/
+  }
 
