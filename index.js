@@ -14,8 +14,7 @@ app.get("/", function (req, res) {
     res.send("Se ha desplegado de manera exitosa el CMaquera ChatBot :D!!!");
 });
 
-const service = function watsonAssistant() {
-  return new AssistantV1({
+const service =  new AssistantV1({
       url: "https://gateway.watsonplatform.net/assistant/api",
       username: process.env.SERVICE_NAME_USERNAME,
       password: process.env.SERVICE_NAME_PASSWORD,
@@ -24,7 +23,7 @@ const service = function watsonAssistant() {
           'X-Watson-Learning-Opt-Out': 'true'
       }
   });
-}
+
 // Facebook Webhook
 
 // Usados para la verificacion
