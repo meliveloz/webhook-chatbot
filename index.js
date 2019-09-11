@@ -44,7 +44,7 @@ app.get("/webhook", function (req, res) {
 // Todos eventos de mesenger seran capturados por esta ruta
 app.post("/webhook", function (req, res) {
     // Verificar si el evento proviene del pagina asociada
-    console.log(req.body.entry);
+    console.log(req.body.entry.messaging);
     if (req.body.object == "page") {
         // Si existe multiples entradas entraas
         req.body.entry.forEach(function(entry) {
