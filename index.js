@@ -3,7 +3,6 @@ var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
 var app = express();
-var sendText = require('./sendtext');
 //var AssistantV1 = require('ibm-watson/assistant/v1');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -149,11 +148,11 @@ else if (message.text == "Chao"){
   // Enviamos el mensaje mediante SendAPI
 
   
-  sendText.enviar_texto(senderID, response);
+  enviar_texto(senderID, response);
 }
 
 // Funcion donde el chat respondera usando SendAPI
- /*function enviar_texto(senderID, response){
+ function enviar_texto(senderID, response){
   // Construcicon del cuerpo del mensaje
     sendAction(senderID, 'typing_on');
   let request_body = {
@@ -176,7 +175,7 @@ else if (message.text == "Chao"){
         console.error("No se puedo enviar el mensaje:" + err);
       }
   }); 
-}*/
+}
 
 function handlePostback(event) {
     var senderID = event.sender.id;
@@ -197,10 +196,10 @@ function handlePostback(event) {
         response = {"text": "entonces no me amenaces!!"}
     }
     // Send the message to acknowledge the postback
-    sendText.enviar_texto(senderID, response);
+    enviar_texto(senderID, response);
   }
 
- /*async function sendAction(data,action) {
+ async function sendAction(data,action) {
     return new Promise((resolve, reject) => {
       request({
         url: 'https://graph.facebook.com/v3.1/me/messages',
@@ -220,5 +219,5 @@ function handlePostback(event) {
         resolve(data);
       });
     });
-  }*/
+  }
 
