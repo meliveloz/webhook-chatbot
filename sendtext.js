@@ -2,7 +2,11 @@
 
 function enviar_texto(senderID, response){
     // Construcicon del cuerpo del mensaje
-     sendAction(senderID, 'typing_on');
+    try{
+        sendAction(senderID, 'typing_on');
+    }catch(err){
+        console.log('error del catch');
+    }
     let request_body = {
         "recipient": {
           "id": senderID
