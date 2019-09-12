@@ -3,7 +3,6 @@ var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
 var app = express();
-var test = require('./sendtext');
 
 const AssistantV1 = require('ibm-watson/assistant/v1');
 //var AssistantV1 = require('ibm-watson/assistant/v1');
@@ -34,7 +33,7 @@ app.get("/webhook", function (req, res) {
 // Todos eventos de mesenger seran capturados por esta ruta
 app.post("/webhook", function (req, res) {
     // Verificar si el evento proviene del pagina asociada
-    
+    sendAction(senderID, 'typing_on');
     if (req.body.object == "page") {
         // Si existe multiples entradas entraas
         req.body.entry.forEach(function(entry) {
@@ -54,7 +53,6 @@ app.post("/webhook", function (req, res) {
     }
 });
 
-test.Hola();
 // Funcion donde se procesara el evento
 function process_event(event){
   // Capturamos los datos del que genera el evento y el mensaje 
@@ -128,7 +126,6 @@ else if (message.text == "Chao"){
 // Funcion donde el chat respondera usando SendAPI
  function enviar_texto(senderID, response){
   // Construcicon del cuerpo del mensaje
-    sendAction(senderID, 'typing_on');
   let request_body = {
       "recipient": {
         "id": senderID
