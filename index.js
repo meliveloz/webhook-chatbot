@@ -3,7 +3,7 @@ var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
 var app = express();
-var AssistantV1 = require('ibm-watson/assistant/v1');
+//var AssistantV1 = require('ibm-watson/assistant/v1');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 // configurar el puerto y el mensaje en caso de exito
@@ -14,7 +14,7 @@ app.get("/", function (req, res) {
     res.send("Se ha desplegado de manera exitosa el CMaquera ChatBot :D!!!");
 });
 
- function watsonAssistant() {
+ /*function watsonAssistant() {
   return new AssistantV1({
       url: "https://gateway.watsonplatform.net/assistant/api",
       username: process.env.SERVICE_NAME_USERNAME,
@@ -24,9 +24,26 @@ app.get("/", function (req, res) {
           'X-Watson-Learning-Opt-Out': 'true'
       }
   });
-}
+}*/
 // Facebook Webhook
+const AssistantV1 = require('ibm-watson/assistant/v1');
+const service = new AssistantV1({
+  version: '2019-02-28',
+  iam_apikey: 'ZWrKTYlOCWc27ZDnjHir2n-LSDcWwU8AQKIT4Wk7KydH',
+  url: '
+  https://gateway.watsonplatform.net/assistant/api/v2/assistants/4c69006d-f30c-439f-bcd7-210026214523/sessions'
+});
 
+service.message({
+  workspace_id: '{workspace_id}',
+  input: {'text': 'Hello'}
+  })
+  .then(res => {
+    console.log(JSON.stringify(res, null, 2));
+  })
+  .catch(err => {
+    console.log(err)
+  });
 // Usados para la verificacion
 app.get("/webhook", function (req, res) {
     // Verificar la coincidendia del token
