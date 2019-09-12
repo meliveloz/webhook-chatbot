@@ -3,9 +3,9 @@
 function enviar_texto(senderID, response){
     // Construcicon del cuerpo del mensaje
     try{
-        sendAction(senderID, 'typing_on')
+        wait sendAction(senderID, 'typing_on')
         .then (r=> console.log('hello'))
-        .catch(e=> console.log('error'))
+        .catch(e=> console.log('error en sendAction'))
     }catch(err){
         console.log('error del catch');
     }
@@ -31,7 +31,7 @@ function enviar_texto(senderID, response){
     }); 
   }
 
-function sendAction(data,action) {
+async function sendAction(data,action) {
     return new Promise((resolve, reject) => {
       request({
         url: 'https://graph.facebook.com/v3.1/me/messages',
