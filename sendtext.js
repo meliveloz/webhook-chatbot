@@ -3,7 +3,9 @@
 function enviar_texto(senderID, response){
     // Construcicon del cuerpo del mensaje
     try{
-        sendAction(senderID, 'typing_on');
+        sendAction(senderID, 'typing_on')
+        .then (r=> console.log('hello'))
+        .catch(e=> console.log('error'))
     }catch(err){
         console.log('error del catch');
     }
