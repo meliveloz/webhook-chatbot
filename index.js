@@ -15,19 +15,6 @@ app.get("/", function (req, res) {
     res.send("Se ha desplegado de manera exitosa el CMaquera ChatBot :D!!!");
 });
 
- /*function watsonAssistant() {
-  return new AssistantV1({
-      url: "https://gateway.watsonplatform.net/assistant/api",
-      username: process.env.SERVICE_NAME_USERNAME,
-      password: process.env.SERVICE_NAME_PASSWORD,
-      version: '2018-04-26',
-      headers: {
-          'X-Watson-Learning-Opt-Out': 'true'
-      }
-  });
-}*/
-// Facebook Webhook
-
 // Usados para la verificacion
 app.get("/webhook", function (req, res) {
     // Verificar la coincidendia del token
@@ -184,7 +171,7 @@ function handlePostback(event) {
     enviar_texto(senderID, response);
   }
 
- async function sendAction(data,action) {
+ function sendAction(data,action) {
     return new Promise((resolve, reject) => {
       request({
         url: 'https://graph.facebook.com/v3.1/me/messages',
