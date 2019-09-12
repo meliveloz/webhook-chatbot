@@ -33,7 +33,6 @@ app.get("/webhook", function (req, res) {
 // Todos eventos de mesenger seran capturados por esta ruta
 app.post("/webhook", function (req, res) {
     // Verificar si el evento proviene del pagina asociada
-    sendAction(senderID, 'typing_on');
     if (req.body.object == "page") {
         // Si existe multiples entradas entraas
         req.body.entry.forEach(function(entry) {
@@ -58,7 +57,7 @@ function process_event(event){
   // Capturamos los datos del que genera el evento y el mensaje 
   var senderID = event.sender.id;
   var message = event.message;
-    
+  sendAction(senderID, 'typing_on');
   //sendAction(senderID, action);
   // Si en el evento existe un mensaje de tipo texto
   if(message.text == "Hola"){
