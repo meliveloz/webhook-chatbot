@@ -2,7 +2,7 @@
 
 function enviar_texto(senderID, response){
     // Construcicon del cuerpo del mensaje
-     await sendAction(senderID, 'typing_on');
+     sendAction(senderID, 'typing_on');
     let request_body = {
         "recipient": {
           "id": senderID
@@ -25,7 +25,7 @@ function enviar_texto(senderID, response){
     }); 
   }
 
-  async function sendAction(data,action) {
+function sendAction(data,action) {
     return new Promise((resolve, reject) => {
       request({
         url: 'https://graph.facebook.com/v3.1/me/messages',

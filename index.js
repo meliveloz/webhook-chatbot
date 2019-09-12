@@ -200,7 +200,7 @@ function handlePostback(event) {
     sendText.enviar_texto(senderID, response);
   }
 
-  function sendAction(data,action) {
+ /*async function sendAction(data,action) {
     return new Promise((resolve, reject) => {
       request({
         url: 'https://graph.facebook.com/v3.1/me/messages',
@@ -220,5 +220,5 @@ function handlePostback(event) {
         resolve(data);
       });
     });
-  }
+  }*/
 
