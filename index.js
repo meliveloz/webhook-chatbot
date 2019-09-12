@@ -30,11 +30,11 @@ const AssistantV1 = require('ibm-watson/assistant/v1');
 const service = new AssistantV1({
   version: '2019-02-28',
   iam_apikey: 'ZWrKTYlOCWc27ZDnjHir2n-LSDcWwU8AQKIT4Wk7KydH',
-  url: 'https://gateway.watsonplatform.net/assistant/api/v2/assistants/4c69006d-f30c-439f-bcd7-210026214523/sessions'
+  url: 'https://gateway.watsonplatform.net/assistant/api/v1/workspaces/9d0ddbc8-379f-4fee-bd8f-318181038722/message'
 });
 
 service.message({
-  workspace_id: process.env.ASSISTANT_WORKSPACEID,
+  workspace_id: '9d0ddbc8-379f-4fee-bd8f-318181038722',
   input: {'text': 'Hello'}
   })
   .then(res => {
