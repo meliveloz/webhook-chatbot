@@ -1,55 +1,63 @@
-// Funcion donde el chat respondera usando SendAPI
-
-function enviar_texto(senderID, response){
-    // Construcicon del cuerpo del mensaje
-    try{
-        wait sendAction(senderID, 'typing_on')
-        .then (r=> console.log('hello'))
-        .catch(e=> console.log('error en sendAction'))
-    }catch(err){
-        console.log('error del catch');
-    }
-    let request_body = {
-        "recipient": {
-          "id": senderID
-        },
-        "message": response
-    }
-    
-    // Enviar el requisito HTTP a la plataforma de messenger
-    request({
-        "uri": "https://graph.facebook.com/v2.6/me/messages",
-        "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
-        "method": "POST",
-        "json": request_body
-    }, (err, res, body) => {
-        if (!err) {
-          console.log("enviando requisito HTTP")
-        } else {
-          console.error("No se puedo enviar el mensaje:" + err);
+function process_event(event){
+    // Capturamos los datos del que genera el evento y el mensaje 
+    var senderID = event.sender.id;
+    var message = event.message;
+      
+    //sendAction(senderID, action);
+    // Si en el evento existe un mensaje de tipo texto
+    if(message.text == "Hola"){
+        // Crear un payload para un simple mensaje de texto
+        var response = {
+            "text": 'hola para ti tambien'
         }
-    }); 
   }
+  else if (message.text == "Chao"){
+      response = { 
+            "text": "Me vas a abandonar?:",
+            "quick_replies":[
+              {
+                "content_type":"text",
+                "title":"SI",
+                "payload":"SI" 
+              },{
+                "content_type":"text",
+                "title":"NO",
+                "payload":"NO"
+              }
+            ]
+          
+        }  
+      }
+    else if (message.text != "Hola") {
+      response = {
+          "attachment": {
+            "type": "template",
+            "payload": {
+              "template_type": "generic",
+              "elements": [{
+                "title": "Te gusta como me veo?",
+                "subtitle": "click en tu respuesta",
+                "image_url": "https://pbs.twimg.com/media/DAMDnjHUMAUcOqN.jpg:large",
+                "buttons": [
+                  {
+                    "type": "postback",
+                    "title": "Yes!",
+                    "payload": "yes",
+                  },
+                  {
+                    "type": "postback",
+                    "title": "No!",
+                    "payload": "no",
+                  }
+                ],
+              }]
+            }
+          }
+        }
+      } 
+        
+     else {
+        console.log("creo que tenemos un error");
+    }
 
-async function sendAction(data,action) {
-    return new Promise((resolve, reject) => {
-      request({
-        url: 'https://graph.facebook.com/v3.1/me/messages',
-        qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
-        method: 'POST',
-        json: {
-          recipient: {id: data},
-          sender_action: action
-        }
-      }, (error, response) => {
-        if (error) {
-          reject('ERROR_FACEBOOK_SENDING_ACTION=');
-        } else if (response.body.error) {
-          reject('ERROR_FACEBOOK_SENDING_ACTION=');
-        }
-  
-        resolve(data);
-      });
-    });
-  }
-  module.exports = {enviar_texto};
+    module.exports = {process_event};
