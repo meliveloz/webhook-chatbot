@@ -3,7 +3,8 @@ var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
 var app = express();
-var text = require('./sendtext');
+var test = require('./sendtext');
+
 const AssistantV1 = require('ibm-watson/assistant/v1');
 //var AssistantV1 = require('ibm-watson/assistant/v1');
 app.use(bodyParser.urlencoded({extended: false}));
@@ -41,7 +42,7 @@ app.post("/webhook", function (req, res) {
             entry.messaging.forEach(function(event) {
                 if (event.message) {
                     console.log(event);
-                    text.process_event(event);
+                    process_event(event);
                 }
                 else if (event.postback) {
                     handlePostback(event);
@@ -53,9 +54,9 @@ app.post("/webhook", function (req, res) {
     }
 });
 
-
+test.Hola();
 // Funcion donde se procesara el evento
-/*function process_event(event){
+function process_event(event){
   // Capturamos los datos del que genera el evento y el mensaje 
   var senderID = event.sender.id;
   var message = event.message;
@@ -115,7 +116,7 @@ else if (message.text == "Chao"){
       
    else {
       console.log("creo que tenemos un error");
-  }*/
+  }
   
   
   // Enviamos el mensaje mediante SendAPI
