@@ -3,6 +3,7 @@ var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
 var app = express();
+const AssistantV1 = require('ibm-watson/assistant/v1');
 //var AssistantV1 = require('ibm-watson/assistant/v1');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -26,23 +27,7 @@ app.get("/", function (req, res) {
   });
 }*/
 // Facebook Webhook
-const AssistantV1 = require('ibm-watson/assistant/v1');
-const service = new AssistantV1({
-  version: '2019-02-28',
-  iam_apikey: 'ZWrKTYlOCWc27ZDnjHir2n-LSDcWwU8AQKIT4Wk7KydH',
-  url: 'https://gateway.watsonplatform.net/assistant/api'
-});
 
-service.message({
-  workspace_id: '9d0ddbc8-379f-4fee-bd8f-318181038722',
-  input: {'text': 'Hello'}
-  })
-  .then(res => {
-    console.log(JSON.stringify(res, null, 2));
-  })
-  .catch(err => {
-    console.log(err)
-  });
 // Usados para la verificacion
 app.get("/webhook", function (req, res) {
     // Verificar la coincidendia del token
@@ -221,3 +206,19 @@ function handlePostback(event) {
     });
   }
 
+  const service = new AssistantV1({
+    version: '2019-02-28',
+    iam_apikey: 'ZWrKTYlOCWc27ZDnjHir2n-LSDcWwU8AQKIT4Wk7KydH',
+    url: 'https://gateway.watsonplatform.net/assistant/api'
+  });
+  
+  service.message({
+    workspace_id: '9d0ddbc8-379f-4fee-bd8f-318181038722',
+    input: {'text': 'Hello'}
+    })
+    .then(res => {
+      console.log(JSON.stringify(res, null, 2));
+    })
+    .catch(err => {
+      console.log(err)
+    });
