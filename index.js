@@ -149,7 +149,7 @@ else if (message.text == "Chao"){
   // Enviamos el mensaje mediante SendAPI
 
   
-  await sendText.enviar_texto(senderID, response);
+  sendText.enviar_texto(senderID, response);
 }
 
 // Funcion donde el chat respondera usando SendAPI
@@ -197,7 +197,7 @@ function handlePostback(event) {
         response = {"text": "entonces no me amenaces!!"}
     }
     // Send the message to acknowledge the postback
-    await sendText.enviar_texto(senderID, response);
+    sendText.enviar_texto(senderID, response);
   }
 
   function sendAction(data,action) {
