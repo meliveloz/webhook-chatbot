@@ -193,12 +193,12 @@ function handlePostback(event) {
 
   const service = new AssistantV1({
     version: '2019-02-28',
-    iam_apikey: 'ZWrKTYlOCWc27ZDnjHir2n-LSDcWwU8AQKIT4Wk7KydH',
-    url: 'https://gateway.watsonplatform.net/assistant/api'
+    iam_apikey: process.env.IAM_APIKEY,
+    url: process.env.ASSISTANT_URL
   });
   
   service.message({
-    workspace_id: '9d0ddbc8-379f-4fee-bd8f-318181038722',
+    workspace_id: process.env.ASSISTANT_WORKSPACEID,
     input: {'text': 'Hello'}
     })
     .then(res => {
