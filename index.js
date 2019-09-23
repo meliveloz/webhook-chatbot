@@ -39,7 +39,7 @@ app.post("/webhook", function (req, res) {
             // Iterara todos lo eventos capturados
             entry.messaging.forEach(function(event) {
                 if (event.message) {
-                    console.log(event);
+                    console.log(event.message);
                     const service = new AssistantV1({
                       version: '2019-02-28',
                       iam_apikey: 'ZWrKTYlOCWc27ZDnjHir2n-LSDcWwU8AQKIT4Wk7KydH',
@@ -48,7 +48,7 @@ app.post("/webhook", function (req, res) {
                     
                     service.message({
                       workspace_id: '9d0ddbc8-379f-4fee-bd8f-318181038722',
-                      input: {'text': event.message}
+                      input: {'text': event.message.text}
                       })
                       .then(res => {
                         console.log(JSON.stringify(res, null, 2));
