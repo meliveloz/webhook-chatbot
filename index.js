@@ -40,6 +40,22 @@ app.post("/webhook", function (req, res) {
             entry.messaging.forEach(function(event) {
                 if (event.message) {
                     console.log(event);
+                    const service = new AssistantV1({
+                      version: '2019-02-28',
+                      iam_apikey: 'ZWrKTYlOCWc27ZDnjHir2n-LSDcWwU8AQKIT4Wk7KydH',
+                      url: 'https://gateway.watsonplatform.net/assistant/api'
+                    });
+                    
+                    service.message({
+                      workspace_id: '9d0ddbc8-379f-4fee-bd8f-318181038722',
+                      input: {'text': event.message}
+                      })
+                      .then(res => {
+                        console.log(JSON.stringify(res, null, 2));
+                      })
+                      .catch(err => {
+                        console.log(err)
+                      });
                     process_event(event);
                 }
                 else if (event.postback) {
@@ -51,6 +67,7 @@ app.post("/webhook", function (req, res) {
         res.sendStatus(200);
     }
 });
+
 
 // Funcion donde se procesara el evento
 function process_event(event){
@@ -190,20 +207,3 @@ function handlePostback(event) {
       });
     });
   }
-
-  const service = new AssistantV1({
-    version: '2019-02-28',
-    iam_apikey: 'ZWrKTYlOCWc27ZDnjHir2n-LSDcWwU8AQKIT4Wk7KydH',
-    url: 'https://gateway.watsonplatform.net/assistant/api'
-  });
-  
-  service.message({
-    workspace_id: '9d0ddbc8-379f-4fee-bd8f-318181038722',
-    input: {'text': 'Hello'}
-    })
-    .then(res => {
-      console.log(JSON.stringify(res, null, 2));
-    })
-    .catch(err => {
-      console.log(err)
-    });
