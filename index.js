@@ -54,13 +54,13 @@ app.post("/webhook", function (req, res) {
                         console.log(JSON.stringify(res, null, 2));
                         res.output.text.forEach(function(data) {
                           console.log('este es el output text '+ data);
-                         
+                          process_event(event, data);
                         })
                       })
                       .catch(err => {
                         console.log(err)
                       });
-                    process_event(event, data);
+                    
                 }
                 else if (event.postback) {
                     handlePostback(event);
