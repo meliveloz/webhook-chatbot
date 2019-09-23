@@ -84,7 +84,7 @@ function process_event(event){
   if(message.text){
       // Crear un payload para un simple mensaje de texto
       var response = {
-          "text": data
+          "text": 'JELOU'
       }
 }
 else if (message.text == "Chao"){
