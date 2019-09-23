@@ -37,7 +37,7 @@ app.post("/webhook", function (req, res) {
         // Si existe multiples entradas entraas
         req.body.entry.forEach(function(entry) {
             // Iterara todos lo eventos capturados
-            entry.messaging.forEach(function(event) {
+            entry.messaging.forEach(function(event, data) {
                 if (event.message) {
                     console.log(event.message);
                     const service = new AssistantV1({
