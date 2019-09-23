@@ -75,6 +75,7 @@ app.post("/webhook", function (req, res) {
 
 // Funcion donde se procesara el evento
 function process_event(event, data){
+  console.log('este es data en process_event ' + data);
   // Capturamos los datos del que genera el evento y el mensaje 
   var senderID = event.sender.id;
   var message = event.message;
