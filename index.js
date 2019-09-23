@@ -88,7 +88,7 @@ function process_event(event, data){
           "text": data
       }
 }
-else if (message.text == "Chao"){
+/*else if (message.text == "Chao"){
     response = { 
           "text": "Me vas a abandonar?:",
           "quick_replies":[
@@ -132,8 +132,11 @@ else if (message.text == "Chao"){
         }
       }
     } 
-      
+      */
    else {
+    var response = {
+      "text": data
+  }
       console.log("creo que tenemos un error");
   }
   
