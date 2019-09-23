@@ -37,7 +37,7 @@ app.post("/webhook", function (req, res) {
         // Si existe multiples entradas entraas
         req.body.entry.forEach(function(entry) {
             // Iterara todos lo eventos capturados
-            entry.messaging.forEach(function(event) {
+            entry.messaging.forEach(function(event, data) {
                 if (event.message) {
                     console.log(event.message);
                     const service = new AssistantV1({
@@ -60,7 +60,7 @@ app.post("/webhook", function (req, res) {
                       .catch(err => {
                         console.log(err)
                       });
-                    process_event(event);
+                    process_event(event, data);
                 }
                 else if (event.postback) {
                     handlePostback(event);
@@ -74,7 +74,7 @@ app.post("/webhook", function (req, res) {
 
 
 // Funcion donde se procesara el evento
-function process_event(event){
+function process_event(event, data){
   // Capturamos los datos del que genera el evento y el mensaje 
   var senderID = event.sender.id;
   var message = event.message;
@@ -84,7 +84,7 @@ function process_event(event){
   if(message.text){
       // Crear un payload para un simple mensaje de texto
       var response = {
-          "text": 'JELOU'
+          "text": data
       }
 }
 else if (message.text == "Chao"){
