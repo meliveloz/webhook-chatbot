@@ -53,7 +53,7 @@ app.post("/webhook", function (req, res) {
                       .then(res => {
                         console.log(JSON.stringify(res, null, 2));
                         res.output.text.forEach(function(event) {
-                          console.log(event);
+                          console.log('este es el output text'+ event);
                         })
                       })
                       .catch(err => {
