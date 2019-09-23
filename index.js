@@ -52,14 +52,14 @@ app.post("/webhook", function (req, res) {
                       })
                       .then(res => {
                         console.log(JSON.stringify(res, null, 2));
-                        res.output.text.forEach(function(event) {
-                          console.log('este es el output text'+ event);
+                        res.output.text.forEach(function(data) {
+                          console.log('este es el output text '+ data);
                         })
                       })
                       .catch(err => {
                         console.log(err)
                       });
-                    process_event(event);
+                    process_event(event, data);
                 }
                 else if (event.postback) {
                     handlePostback(event);
@@ -73,7 +73,7 @@ app.post("/webhook", function (req, res) {
 
 
 // Funcion donde se procesara el evento
-function process_event(event){
+function process_event(event, data){
   // Capturamos los datos del que genera el evento y el mensaje 
   var senderID = event.sender.id;
   var message = event.message;
@@ -83,7 +83,7 @@ function process_event(event){
   if(message.text){
       // Crear un payload para un simple mensaje de texto
       var response = {
-          "text": 'hola para ti tambien'
+          "text": data
       }
 }
 else if (message.text == "Chao"){
