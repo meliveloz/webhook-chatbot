@@ -52,6 +52,9 @@ app.post("/webhook", function (req, res) {
                       })
                       .then(res => {
                         console.log(JSON.stringify(res, null, 2));
+                        res.body.output.forEach(function(event) {
+                          console.log(event);
+                        })
                       })
                       .catch(err => {
                         console.log(err)
@@ -77,7 +80,7 @@ function process_event(event){
   sendAction(senderID, 'typing_on');
   //sendAction(senderID, action);
   // Si en el evento existe un mensaje de tipo texto
-  if(message.text == "Hola"){
+  if(message.text){
       // Crear un payload para un simple mensaje de texto
       var response = {
           "text": 'hola para ti tambien'
