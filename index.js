@@ -3,6 +3,7 @@ var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
 var app = express();
+var sendTypping = require("./typping");
 
 const AssistantV1 = require('ibm-watson/assistant/v1');
 //var AssistantV1 = require('ibm-watson/assistant/v1');
@@ -10,12 +11,10 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 // configurar el puerto y el mensaje en caso de exito
 app.listen((process.env.PORT || 5000), () => console.log('El servidor webhook esta escchando!'));
-
 // Ruta de la pagina index
 app.get("/", function (req, res) {
     res.send("Se ha desplegado de manera exitosa el CMaquera ChatBot :D!!!");
 });
-
 // Usados para la verificacion
 app.get("/webhook", function (req, res) {
     // Verificar la coincidendia del token
@@ -29,7 +28,6 @@ app.get("/webhook", function (req, res) {
         res.sendStatus(403);
     }
 });
-
 // Todos eventos de mesenger seran capturados por esta ruta
 app.post("/webhook", function (req, res) {
     // Verificar si el evento proviene del pagina asociada
@@ -71,15 +69,13 @@ app.post("/webhook", function (req, res) {
         res.sendStatus(200);
     }
 });
-
-
 // Funcion donde se procesara el evento
 function process_event(event, data){
   console.log('este es data en process_event ' + data);
   // Capturamos los datos del que genera el evento y el mensaje 
   var senderID = event.sender.id;
   var message = event.message;
-  sendAction(senderID, 'typing_on');
+  sendTypping.sendAction(senderID, 'typing_on');
   //sendAction(senderID, action);
   // Si en el evento existe un mensaje de tipo texto
   if(message.text){
@@ -192,26 +188,4 @@ function handlePostback(event) {
     }
     // Send the message to acknowledge the postback
     enviar_texto(senderID, response);
-  }
-
- function sendAction(data,action) {
-    return new Promise((resolve, reject) => {
-      request({
-        url: 'https://graph.facebook.com/v3.1/me/messages',
-        qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
-        method: 'POST',
-        json: {
-          recipient: {id: data},
-          sender_action: action
-        }
-      }, (error, response) => {
-        if (error) {
-          reject('ERROR_FACEBOOK_SENDING_ACTION=');
-        } else if (response.body.error) {
-          reject('ERROR_FACEBOOK_SENDING_ACTION=');
-        }
-  
-        resolve(data);
-      });
-    });
   }
