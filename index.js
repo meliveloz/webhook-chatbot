@@ -4,6 +4,7 @@ var request = require("request");
 var bodyParser = require("body-parser");
 var app = express();
 var sendTypping = require("./typping");
+var sendText = require('./sendtext');
 
 const AssistantV1 = require('ibm-watson/assistant/v1');
 //var AssistantV1 = require('ibm-watson/assistant/v1');
@@ -147,33 +148,14 @@ function process_event(event, data){
   // Enviamos el mensaje mediante SendAPI
 
   
-  enviar_texto(senderID, response);
+  sendText.enviar_texto(senderID, response).then((data)=>{
+    console.log('funciono bien sendtext '+ data);
+  }).catch((error)=> {
+    console.log('esto es un error de sendtext' + error);
+  })
 }
 
-// Funcion donde el chat respondera usando SendAPI
- function enviar_texto(senderID, response){
-  // Construcicon del cuerpo del mensaje
-  let request_body = {
-      "recipient": {
-        "id": senderID
-      },
-      "message": response
-  }
-  
-  // Enviar el requisito HTTP a la plataforma de messenger
-  request({
-      "uri": "https://graph.facebook.com/v2.6/me/messages",
-      "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
-      "method": "POST",
-      "json": request_body
-  }, (err, res, body) => {
-      if (!err) {
-        console.log("enviando requisito HTTP")
-      } else {
-        console.error("No se puedo enviar el mensaje:" + err);
-      }
-  }); 
-}
+
 
 function handlePostback(event) {
     var senderID = event.sender.id;
