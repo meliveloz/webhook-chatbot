@@ -2,19 +2,18 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var app = express();
-var sendText = require('./sendtext');
 var processEvent = require('./processevent');
 var postback = require('./postback');
-
-const AssistantV1 = require('ibm-watson/assistant/v1');
+var watsonIntegration = require('./watson');
 //var AssistantV1 = require('ibm-watson/assistant/v1');
+
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 // configurar el puerto y el mensaje en caso de exito
 app.listen((process.env.PORT || 5000), () => console.log('El servidor webhook esta escchando!'));
 // Ruta de la pagina index
 app.get("/", function (req, res) {
-    res.send("Se ha desplegado de manera exitosa el CMaquera ChatBot :D!!!");
+    res.send('desplegamos exitosamente!!');
 });
 // Usados para la verificacion
 app.get("/webhook", function (req, res) {
@@ -39,17 +38,8 @@ app.post("/webhook", function (req, res) {
             entry.messaging.forEach(function(event, data) {
                 if (event.message) {
                     console.log(event.message);
-                    const service = new AssistantV1({
-                      version: '2019-02-28',
-                      iam_apikey: 'ZWrKTYlOCWc27ZDnjHir2n-LSDcWwU8AQKIT4Wk7KydH',
-                      url: 'https://gateway.watsonplatform.net/assistant/api'
-                    });
                     
-                    service.message({
-                      workspace_id: '9d0ddbc8-379f-4fee-bd8f-318181038722',
-                      input: {'text': event.message.text}
-                      })
-                      .then(res => {
+                      watsonIntegration.watsonIntegration().then(res => {
                         console.log(JSON.stringify(res, null, 2));
                         res.output.text.forEach(function(data) {
                           console.log('este es el output text '+ data);
@@ -70,7 +60,5 @@ app.post("/webhook", function (req, res) {
         res.sendStatus(200);
     }
 });
-// Funcion donde se procesara el evento
 
-  // Enviamos el mensaje mediante SendAPI
 
