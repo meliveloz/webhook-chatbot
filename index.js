@@ -148,15 +148,8 @@ function process_event(event, data){
   // Enviamos el mensaje mediante SendAPI
 
   
-  sendText.enviar_texto(senderID, response).then((data)=>{
-    console.log('funciono bien sendtext '+ data);
-  }).catch((error)=> {
-    console.log('esto es un error de sendtext' + error);
-  })
-}
-
-
-
+  sendText.enviar_texto(senderID, response);
+};
 function handlePostback(event) {
     var senderID = event.sender.id;
     var message = event.postback;
