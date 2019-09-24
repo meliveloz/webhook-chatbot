@@ -1,5 +1,5 @@
-var sendText = require('./typping');
-var sendTypping = require('./sendtext');
+var sendText = require('./sendtext');
+var sendTypping = require('./typping');
 
 function process_event(event, data){
     console.log('este es data en process_event ' + data);
