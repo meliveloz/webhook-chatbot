@@ -1,10 +1,9 @@
 // Importar las dependencias para configurar el servidor
 var express = require("express");
-var request = require("request");
 var bodyParser = require("body-parser");
 var app = express();
-var sendTypping = require("./typping");
 var sendText = require('./sendtext');
+var processEvent = require('./processevent');
 
 const AssistantV1 = require('ibm-watson/assistant/v1');
 //var AssistantV1 = require('ibm-watson/assistant/v1');
@@ -53,7 +52,7 @@ app.post("/webhook", function (req, res) {
                         console.log(JSON.stringify(res, null, 2));
                         res.output.text.forEach(function(data) {
                           console.log('este es el output text '+ data);
-                          process_event(event, data);
+                          processEvent.process_event(event, data);
                         })
                       })
                       .catch(err => {
@@ -71,85 +70,9 @@ app.post("/webhook", function (req, res) {
     }
 });
 // Funcion donde se procesara el evento
-function process_event(event, data){
-  console.log('este es data en process_event ' + data);
-  // Capturamos los datos del que genera el evento y el mensaje 
-  var senderID = event.sender.id;
-  var message = event.message;
-  sendTypping.sendAction(senderID, 'typing_on').then((data)=>{
-    console.log('TODO OK CON LA PROMESA ' + data);
-  }
-    
-  ).catch((error)=>{
-    console.log('esto es un error ' + error);
-  })
- 
-  //sendAction(senderID, action);
-  // Si en el evento existe un mensaje de tipo texto
-  if(message.text){
-      // Crear un payload para un simple mensaje de texto
-      var response = {
-          "text": data
-      }
-}
-/*else if (message.text == "Chao"){
-    response = { 
-          "text": "Me vas a abandonar?:",
-          "quick_replies":[
-            {
-              "content_type":"text",
-              "title":"SI",
-              "payload":"SI" 
-            },{
-              "content_type":"text",
-              "title":"NO",
-              "payload":"NO"
-            }
-          ]
-        
-      }  
-    }
-  else if (message.text != "Hola") {
-    response = {
-        "attachment": {
-          "type": "template",
-          "payload": {
-            "template_type": "generic",
-            "elements": [{
-              "title": "Te gusta como me veo?",
-              "subtitle": "click en tu respuesta",
-              "image_url": "https://pbs.twimg.com/media/DAMDnjHUMAUcOqN.jpg:large",
-              "buttons": [
-                {
-                  "type": "postback",
-                  "title": "Yes!",
-                  "payload": "yes",
-                },
-                {
-                  "type": "postback",
-                  "title": "No!",
-                  "payload": "no",
-                }
-              ],
-            }]
-          }
-        }
-      }
-    } 
-      */
-   else {
-    var response = {
-      "text": data
-  }
-      console.log("creo que tenemos un error");
-  }
-  
-  
+
   // Enviamos el mensaje mediante SendAPI
 
-  
-  sendText.enviar_texto(senderID, response);
-};
 function handlePostback(event) {
     var senderID = event.sender.id;
     var message = event.postback;
@@ -169,5 +92,5 @@ function handlePostback(event) {
         response = {"text": "entonces no me amenaces!!"}
     }
     // Send the message to acknowledge the postback
-    enviar_texto(senderID, response);
+    sendText.enviar_texto(senderID, response);
   }
