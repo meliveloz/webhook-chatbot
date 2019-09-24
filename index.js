@@ -75,7 +75,11 @@ function process_event(event, data){
   // Capturamos los datos del que genera el evento y el mensaje 
   var senderID = event.sender.id;
   var message = event.message;
-  sendTypping.sendAction(senderID, 'typing_on');
+  sendTypping.sendAction(senderID, 'typing_on').then(
+    console.log('TODO OK CON LA PROMESA');
+  ).catch(
+    console.log('TODO MAL CON LA PROMESA');
+  )
   //sendAction(senderID, action);
   // Si en el evento existe un mensaje de tipo texto
   if(message.text){
