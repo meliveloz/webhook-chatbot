@@ -4,6 +4,7 @@ var bodyParser = require("body-parser");
 var app = express();
 var sendText = require('./sendtext');
 var processEvent = require('./processevent');
+var postback = require('./postback');
 
 const AssistantV1 = require('ibm-watson/assistant/v1');
 //var AssistantV1 = require('ibm-watson/assistant/v1');
@@ -61,7 +62,7 @@ app.post("/webhook", function (req, res) {
                     
                 }
                 else if (event.postback) {
-                    handlePostback(event);
+                    postback.handlePostback(event);
                     console.log(event);
                   }
             });
@@ -73,24 +74,3 @@ app.post("/webhook", function (req, res) {
 
   // Enviamos el mensaje mediante SendAPI
 
-function handlePostback(event) {
-    var senderID = event.sender.id;
-    var message = event.postback;
-    let response;
-
-    // Get the payload for the postback
-    let payload = message.payload;
-  
-    // Set the response based on the postback payload
-    if (payload === 'yes') {
-      response = { "text": "Gracias, me caes bien" }
-    } else if (payload === 'no') {
-      response = { "text": "mmm no me caes bien" }
-    } else if (payload === 'SI'){
-        response = {"text": "OK, te veo despues"}
-    } else if (payload === "NO") {
-        response = {"text": "entonces no me amenaces!!"}
-    }
-    // Send the message to acknowledge the postback
-    sendText.enviar_texto(senderID, response);
-  }
