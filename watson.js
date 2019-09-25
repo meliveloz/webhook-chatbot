@@ -1,6 +1,6 @@
 const AssistantV1 = require('ibm-watson/assistant/v1');
 
-function watsonIntegration(){
+function watsonIntegration(event){
     const service = new AssistantV1({
         version: '2019-02-28',
         iam_apikey: 'ZWrKTYlOCWc27ZDnjHir2n-LSDcWwU8AQKIT4Wk7KydH',
