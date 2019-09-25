@@ -16,7 +16,7 @@ function handlePostback(event) {
     } else if (payload === 'SI'){
         response = {"text": "OK, te veo despues"}
     } else if (payload === "NO") {
-        response = {"text": "entonces no me amenaces!!"}
+        response = {"text": "entonces no!!"}
     }
     // Send the message to acknowledge the postback
     sendText.enviar_texto(senderID, response);

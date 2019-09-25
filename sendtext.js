@@ -8,7 +8,6 @@ function enviar_texto(senderID, response){
         },
         "message": response
     }
-    
     // Enviar el requisito HTTP a la plataforma de messenger
     request({
         "uri": "https://graph.facebook.com/v2.6/me/messages",
@@ -23,5 +22,5 @@ function enviar_texto(senderID, response){
         }
     }); 
   }
-  
+
   module.exports = {enviar_texto};

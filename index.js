@@ -43,7 +43,6 @@ app.post("/webhook", function (req, res) {
                           iam_apikey: 'ZWrKTYlOCWc27ZDnjHir2n-LSDcWwU8AQKIT4Wk7KydH',
                           url: 'https://gateway.watsonplatform.net/assistant/api'
                         });
-                        
                         service.message({
                           workspace_id: '9d0ddbc8-379f-4fee-bd8f-318181038722',
                           input: {'text': event.message.text}
@@ -58,9 +57,7 @@ app.post("/webhook", function (req, res) {
                       .catch(err => {
                         console.log(err)
                       });
-                    
-                }
-                else if (event.postback) {
+                } else if (event.postback) {
                     postback.handlePostback(event);
                     console.log(event);
                   }
