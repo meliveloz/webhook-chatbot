@@ -5,7 +5,7 @@ var app = express();
 var processEvent = require('./processevent');
 var postback = require('./postback');
 var watsonIntegration = require('./watson');
-const AssistantV1 = require('ibm-watson/assistant/v1');
+var testJson = require('./testjson')
 //var AssistantV1 = require('ibm-watson/assistant/v1');
 
 app.use(bodyParser.urlencoded({extended: false}));
@@ -33,7 +33,7 @@ app.get("/webhook", function (req, res) {
 app.post("/webhook", function (req, res) {
     // Verificar si el evento proviene del pagina asociada
     if (req.body.object == "page") {
-        // Si existe multiples entradas entraas
+        // Si existe multiples entradas
         req.body.entry.forEach(function(entry) {
             // Iterara todos lo eventos capturados
             entry.messaging.forEach(function(event, data) {
@@ -60,4 +60,4 @@ app.post("/webhook", function (req, res) {
     }
 });
 
-
+console.log(testJson.squadname);
