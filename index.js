@@ -39,8 +39,8 @@ app.post("/webhook", function (req, res) {
             entry.messaging.forEach(function(event) {
                 console.log(entry.messaging);
                 if (event.message) {
-                    console.log(event.message);
                      watsonIntegration.watsonIntegration(event)
+                     console.log('esto es hasta antes del then');
                      .then(res => {
                         console.log(JSON.stringify(res, null, 2));
                         res.output.text.forEach(function(data) {
@@ -60,3 +60,4 @@ app.post("/webhook", function (req, res) {
         res.sendStatus(200);
     }
 });
+
