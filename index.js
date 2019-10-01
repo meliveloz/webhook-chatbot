@@ -35,7 +35,7 @@ app.post("/webhook", function (req, res) {
         // Si existe multiples entradas
         req.body.entry.forEach(function(entry) {
             // Iterara todos lo eventos capturados
-            entry.messaging.forEach(function(event, data) {
+            entry.messaging.forEach(function(event) {
                 if (event.message) {
                     console.log(`hello este es el event.message ${event.message}`);
                      watsonIntegration.watsonIntegration(event)
