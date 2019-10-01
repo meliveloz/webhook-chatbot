@@ -5,7 +5,6 @@ var app = express();
 var processEvent = require('./processevent');
 var postback = require('./postback');
 var watsonIntegration = require('./watson');
-var testJson = require('./testjson')
 //var AssistantV1 = require('ibm-watson/assistant/v1');
 
 app.use(bodyParser.urlencoded({extended: false}));
