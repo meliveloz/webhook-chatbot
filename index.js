@@ -33,11 +33,12 @@ app.post("/webhook", function (req, res) {
     // Verificar si el evento proviene del pagina asociada
     if (req.body.object == "page") {
         // Si existe multiples entradas
+        console.log(req.body);
         req.body.entry.forEach(function(entry) {
             // Iterara todos lo eventos capturados
             entry.messaging.forEach(function(event) {
                 if (event.message) {
-                    console.log(`hello este es el event.message ${event.message}`);
+                    console.log(event.message);
                      watsonIntegration.watsonIntegration(event)
                      .then(res => {
                         console.log(JSON.stringify(res, null, 2));
