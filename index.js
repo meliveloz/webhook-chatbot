@@ -32,26 +32,26 @@ app.get("/webhook", function (req, res) {
 app.post("/webhook", function (req, res) {
     // Verificar si el evento proviene del pagina asociada
     if (req.body.object == "page") {
-        // Si existe multiples entradas
-        console.log(req.body);
+        // Si existe multiples entradas entraas
         req.body.entry.forEach(function(entry) {
             // Iterara todos lo eventos capturados
-            entry.messaging.forEach(function(event) {
-                console.log(entry.messaging);
+            entry.messaging.forEach(function(event, data) {
                 if (event.message) {
-                     watsonIntegration.watsonIntegration(event)
-                     .then(res => {
+                    console.log(event.message);
+                    
+                      watsonIntegration.watsonIntegration().then(res => {
                         console.log(JSON.stringify(res, null, 2));
                         res.output.text.forEach(function(data) {
-                          console.log('este es data :' + data);
-                          processEvent.process_event(event, data)
-                          })
-                          
+                          console.log('este es el output text '+ data);
+                          processEvent.process_event(event, data);
+                        })
                       })
                       .catch(err => {
                         console.log(err)
                       });
-                } else if (event.postback) {
+                    
+                }
+                else if (event.postback) {
                     postback.handlePostback(event);
                     console.log(event);
                   }
@@ -60,4 +60,5 @@ app.post("/webhook", function (req, res) {
         res.sendStatus(200);
     }
 });
+
 
