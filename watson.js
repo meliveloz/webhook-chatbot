@@ -13,6 +13,11 @@ function watsonIntegration(event){
         workspace_id: '9d0ddbc8-379f-4fee-bd8f-318181038722',
         input: {'text': event.message.text}
         })
-        console.log('esto es hasta antes del then')
+        .then(res => {
+          console.log(JSON.stringify(res, null, 2));
+          res.output.text.forEach(function(data) {
+            console.log('este es el output text '+ data);
+          })
+        })
 }
 module.exports = {watsonIntegration};
