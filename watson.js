@@ -16,7 +16,7 @@ function watsonIntegration(event){
         .then(res => {
           console.log(JSON.stringify(res, null, 2));
           res.output.text.forEach(function(data) {
-            return data;
+            console.log('este es data :' + data);
             })
         })
 }
