@@ -40,7 +40,7 @@ app.post("/webhook", function (req, res) {
                 console.log(entry.messaging);
                 if (event.message) {
                      watsonIntegration.watsonIntegration(event)
-                     .then(data => {
+                     .then(res => {
                         console.log(JSON.stringify(res, null, 2));
                         res.output.text.forEach(function(data) {
                           console.log('este es data :' + data);
