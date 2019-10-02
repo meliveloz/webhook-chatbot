@@ -13,6 +13,6 @@ function watsonIntegration(event){
         workspace_id: '9d0ddbc8-379f-4fee-bd8f-318181038722',
         input: {'text': event.message.text}
         })
-       
+        console.log('esto es hasta antes del then')
 }
 module.exports = {watsonIntegration};
