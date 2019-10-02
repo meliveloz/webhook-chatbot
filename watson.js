@@ -1,6 +1,7 @@
 const AssistantV1 = require('ibm-watson/assistant/v1');
 
 function watsonIntegration(event){
+  console.log('entre a watson');
   
     const service = new AssistantV1({
         version: '2019-02-28',
