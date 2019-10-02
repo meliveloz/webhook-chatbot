@@ -32,9 +32,11 @@ app.get("/webhook", function (req, res) {
 app.post("/webhook", function (req, res) {
     // Verificar si el evento proviene del pagina asociada
     if (req.body.object == "page") {
+        console.log(req.body.object);
         // Si existe multiples entradas entraas
         req.body.entry.forEach(function(entry) {
             // Iterara todos lo eventos capturados
+            console.log(entry);
             entry.messaging.forEach(function(event, data) {
                 if (event.message) {
                     console.log(event.message);
