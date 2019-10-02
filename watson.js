@@ -16,11 +16,7 @@ function watsonIntegration(event){
           console.log(JSON.stringify(res, null, 2));
           res.output.text.forEach(function(data) {
             console.log('este es data :' + data);
-            return datos = {
-              output: data,
-              userID: event.sender.id,
-              message: event.message
-            }
+            return data;
             })
             
         })
