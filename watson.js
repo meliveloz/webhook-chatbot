@@ -1,8 +1,7 @@
 const AssistantV1 = require('ibm-watson/assistant/v1');
 
 function watsonIntegration(event){
-  console.log('este es el event.message.text');
-  console.log (event.message.text);
+  
     const service = new AssistantV1({
         version: '2019-02-28',
         iam_apikey: 'ZWrKTYlOCWc27ZDnjHir2n-LSDcWwU8AQKIT4Wk7KydH',
@@ -18,6 +17,7 @@ function watsonIntegration(event){
           res.output.text.forEach(function(data) {
             console.log('este es data :' + data);
             })
+            return data;
         })
 }
 module.exports = {watsonIntegration};
