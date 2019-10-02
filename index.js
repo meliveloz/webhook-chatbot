@@ -41,7 +41,8 @@ app.post("/webhook", function (req, res) {
                 if (event.message) {
                      watsonIntegration.watsonIntegration(event)
                      .then(data => {
-                        processEvent.process_event(event, data)
+                         console.log('despues del then , tengo el data aqui ' + data)
+                        processEvent.process_event(data)
                      })
                       .catch(err => {
                         console.log(err)
