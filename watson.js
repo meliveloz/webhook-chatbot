@@ -12,13 +12,6 @@ function watsonIntegration(event){
         workspace_id: '9d0ddbc8-379f-4fee-bd8f-318181038722',
         input: {'text': event.message.text}
         })
-        .then(res => {
-          console.log(JSON.stringify(res, null, 2));
-          res.output.text.forEach(function(data) {
-            console.log('este es data :' + data);
-            return data;
-            })
-            
-        })
+        
 }
 module.exports = {watsonIntegration};
