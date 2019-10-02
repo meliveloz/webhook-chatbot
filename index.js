@@ -4,8 +4,8 @@ var bodyParser = require("body-parser");
 var app = express();
 var processEvent = require('./processevent');
 var postback = require('./postback');
-var watsonIntegration = require('./watson');
-//var AssistantV1 = require('ibm-watson/assistant/v1');
+//var watsonIntegration = require('./watson');
+var AssistantV1 = require('ibm-watson/assistant/v1');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -39,7 +39,17 @@ app.post("/webhook", function (req, res) {
                 if (event.message) {
                     console.log(event.message);
                     
-                      watsonIntegration.watsonIntegration(event).then(res => {
+                    const service = new AssistantV1({
+                        version: '2019-02-28',
+                        iam_apikey: 'ZWrKTYlOCWc27ZDnjHir2n-LSDcWwU8AQKIT4Wk7KydH',
+                        url: 'https://gateway.watsonplatform.net/assistant/api'
+                      });
+                      
+                      service.message({
+                        workspace_id: '9d0ddbc8-379f-4fee-bd8f-318181038722',
+                        input: {'text': event.message.text}
+                        })
+                        .then(res => {
                         console.log(JSON.stringify(res, null, 2));
                         res.output.text.forEach(function(data) {
                           console.log('este es el output text '+ data);
