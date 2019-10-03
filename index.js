@@ -56,6 +56,12 @@ app.post("/webhook", function (req, res) {
                         res.output.text.forEach(function(data) {
                           console.log('este es el output text '+ data);
                           processEvent.process_event(event, data);
+                          var request = require('request');
+                        request('https://api.scltrans.it/v2/stops/PB1/next_arrivals', function (error, response, body) {
+                            console.log('error:', error); // Print the error if one occurred
+                            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+                            console.log('body:', body); // Print the HTML for the Google homepage.
+});
                         })
                       })
                       .catch(err => {
