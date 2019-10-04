@@ -54,12 +54,12 @@ app.post("/webhook", function (req, res) {
                         .then(res => {
                             if (res.output.generic){
                                 res.output.generic.forEach(function(data) {
-                                    if(data[1].response_type === 'option'){
+                                    /*if(data[1].response_type === 'option'){
                                         boton = {
                                             title : data[2].title
                         
-                                        }
-                                        console.log('esto es un boton')
+                                        }*/
+                                        console.log('esto es un generic' + data);
                                         console.log('el objeto es' + boton)
                                     }
                                     else if (data[1].response_type === 'text'){
