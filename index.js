@@ -55,15 +55,14 @@ app.post("/webhook", function (req, res) {
                             if (res.output.generic){
                                 res.output.generic.forEach(function(data) {
                                     console.log(data.response_type);
-                                    /*if(data[1].response_type === 'option'){
-                                        boton = {
+                                    if(data.response_type === 'option'){
+                                       /* boton = {
                                             title : data[2].title
                         
-                                        }
-                                        console.log('esto es un boton')
-                                        console.log('el objeto es' + boton)
-                                    }*/
-                                    if (data[1].response_type === 'text'){
+                                        }*/
+                                        console.log('jeje estoy dentro de options');
+                                    }
+                                   else  if (data[1].response_type === 'text'){
                                         console.log(JSON.stringify(res, null, 2));
                                         res.output.text.forEach(function(data) {
                                         console.log('este es el output text '+ data);
