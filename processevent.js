@@ -2,7 +2,8 @@ var sendText = require('./sendtext');
 var sendTypping = require('./typping');
 
 function process_event(event, data){
-    console.log('este es data en process_event ' + data);
+    console.log('este es data en process_event ')
+    console.log(data)
     // Capturamos los datos del que genera el evento y el mensaje 
     var senderID = event.sender.id;
     var message = event.message;
@@ -24,16 +25,22 @@ function process_event(event, data){
             "type":"template",
             "payload":{
               "template_type":"button",
-              "text": data.title,
+              "text":"What do you want to do next?",
               "buttons":[
                 {
-                  
-                  "title":"Visit Messenger"
+                  "type":"web_url",
+                  "url":"https://petersapparel.parseapp.com",
+                  "title":"Show Website"
+                },
+                {
+                  "type":"postback",
+                  "title":"Start Chatting",
+                  "payload":"USER_DEFINED_PAYLOAD"
                 }
               ]
             }
           }
-        }
+      }
       }
     
         console.log("creo que tenemos un error");
