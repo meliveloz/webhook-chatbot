@@ -52,26 +52,29 @@ app.post("/webhook", function (req, res) {
                         input: {'text': event.message.text}
                         })
                         .then(res => {
-                        if(res.output.text){
-                            console.log(JSON.stringify(res, null, 2));
-                            res.output.text.forEach(function(data) {
-                              console.log('este es el output text '+ data);
-                              processEvent.process_event(event, data);
-                            })
-                            
-                        } else if (res.output.generic){
-                            res.output.generic.forEach(function(data) {
-                                if(data.description === 'boton'){
-                                    boton = {
-                                        title : data[2].title
+                            if (res.output.generic){
+                                res.output.generic.forEach(function(data) {
+                                    if(data[1].response_type === 'option'){
+                                        boton = {
+                                            title : data[2].title
+                        
+                                        }
+                                        console.log('esto es un boton')
+                                        console.log('el objeto es' + boton)
+                                    }
+                                    else if (data[1].response_type === 'text'){
+                                        console.log(JSON.stringify(res, null, 2));
+                                        res.output.text.forEach(function(data) {
+                                        console.log('este es el output text '+ data);
+                                        processEvent.process_event(event, data);
+                                     })
+
 
                                     }
-                                    console.log('esto es un boton')
-                                    console.log('el objeto es' + boton)
-                                }
-                            
-                              })
-                        }
+                                
+                                  })
+                            }
+                    
                       })
                       .catch(err => {
                         console.log(err)
