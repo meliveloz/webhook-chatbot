@@ -1,4 +1,4 @@
-var request = require("request");
+var request = require('request');
  function sendAction(data,action) {
     return new Promise((resolve, reject) => {
       request({

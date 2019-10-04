@@ -1,5 +1,6 @@
 // Funcion donde el chat respondera usando SendAPI
 var request = require("request");
+
 function enviar_texto(senderID, response){
     // Construcicon del cuerpo del mensaje
     let request_body = {
@@ -22,5 +23,4 @@ function enviar_texto(senderID, response){
         }
     }); 
   }
-
   module.exports = {enviar_texto};
