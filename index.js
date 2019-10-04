@@ -56,7 +56,7 @@ app.post("/webhook", function (req, res) {
                                 res.output.generic.forEach(function(data) {
                                     console.log(data.response_type);
                                     if(data.response_type === 'option'){
-                                       boton = {
+                                       var boton = {
                                             title : data.title
                         
                                         }
