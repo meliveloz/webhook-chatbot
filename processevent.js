@@ -20,7 +20,6 @@ function process_event(event, data){
     }
      else {
       var response = {
-        "message":{
           "attachment":{
             "type":"template",
             "payload":{
@@ -40,7 +39,7 @@ function process_event(event, data){
               ]
             }
           }
-      }
+      
       }
     
         console.log("creo que tenemos un error");
