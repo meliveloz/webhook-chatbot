@@ -57,7 +57,7 @@ app.post("/webhook", function (req, res) {
                                     console.log(data.response_type);
                                     if(data.response_type === 'option'){
                                       
-                                        console.log(data.options);
+                                        console.log(data.options[0]);
                                     }
                                    else  if (data.response_type === 'text'){
                                         console.log(JSON.stringify(res, null, 2));
