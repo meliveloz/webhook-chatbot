@@ -13,12 +13,12 @@ function process_event(event, data){
       console.log('esto es un error ' + error);
     })
     // Si en el evento existe un mensaje de tipo texto
-    if(message.text){
+   /* if(message.text){
         var response = {
             "text": data
         }
     }
-     else {
+     else {*/
       var response = {
           "attachment":{
             "type":"template",
@@ -43,7 +43,7 @@ function process_event(event, data){
       }
     
         console.log("creo que tenemos un error");
-    }
+    
     // Enviamos el mensaje mediante SendAPI 
     sendText.enviar_texto(senderID, response);
   };
