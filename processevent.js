@@ -7,7 +7,7 @@ function process_event(event, data){
     // Capturamos los datos del que genera el evento y el mensaje 
     var senderID = event.sender.id;
     var message = event.message;
-    sendTypping.sendAction(senderID, 'typing_on').then((data)=>{
+    sendTypping.sendAction(senderID, 'typing_on').then(()=>{
       console.log('TODO OK CON LA PROMESA ' + data.title);
     }).catch((error)=>{
       console.log('esto es un error ' + error);
