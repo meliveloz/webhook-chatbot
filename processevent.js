@@ -19,8 +19,23 @@ function process_event(event, data){
     }
      else {
       var response = {
-        "text": data
-    }
+        "message":{
+          "attachment":{
+            "type":"template",
+            "payload":{
+              "template_type":"button",
+              "text": data.title,
+              "buttons":[
+                {
+                  
+                  "title":"Visit Messenger"
+                }
+              ]
+            }
+          }
+        }
+      }
+    
         console.log("creo que tenemos un error");
     }
     // Enviamos el mensaje mediante SendAPI 

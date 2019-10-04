@@ -58,10 +58,11 @@ app.post("/webhook", function (req, res) {
                                     if(data.response_type === 'option'){
                                       var boton = {
                                           title: data.title,
-                                          label_1: data.options[0]
-
+                                        
                                       }
+                                      
                                         console.log(boton);
+                                        processEvent.process_event(event, boton);
                                     }
                                    else  if (data.response_type === 'text'){
                                         console.log(JSON.stringify(res, null, 2));
