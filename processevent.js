@@ -24,12 +24,12 @@ function process_event(event, data){
             "type":"template",
             "payload":{
               "template_type":"button",
-              "text":"What do you want to do next?",
+              "text":data.title,
               "buttons":[
                 {
-                  "type":"web_url",
-                  "url":"https://petersapparel.parseapp.com",
-                  "title":"Show Website"
+                  "type":"postback",
+                  "title":"Show Website",
+                  "payload":"lol"
                 },
                 {
                   "type":"postback",
