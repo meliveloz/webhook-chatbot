@@ -68,15 +68,10 @@ app.post("/webhook", function (req, res) {
                                     }
                                     console.log('esto es un boton')
                                     console.log('el objeto es' + boton)
-
-
                                 }
-                                console.log('este es el output text '+ data);
-                                processEvent.process_event(event, data);
+                            
                               })
-
                         }
-                       
                       })
                       .catch(err => {
                         console.log(err)
